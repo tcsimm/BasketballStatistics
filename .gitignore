@@ -1,0 +1,24 @@
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+.Rapp.history
+
+# SQLite
+*.db
+
+# Notebooks
+*.ipynb_checkpoints/
+*.nb.html
+
+# System
+.DS_Store
+
+# VS Code / JetBrains
+.vscode/
+.idea/
+
+# Python / general
+__pycache__/
+.env
