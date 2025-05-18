@@ -1,0 +1,57 @@
+---
+title: "Real-World Basketball Data - SQL Cleaning"
+output: html_notebook
+---
+
+```{r}
+# Import necessary libraries
+library(dplyr)
+library(readr)
+
+# Read provided csv files
+games <- read_csv("games.csv")
+players <- read_csv("players.csv")
+teams <- read_csv("teams.csv")
+ranking <- read_csv("ranking.csv")
+```
+```{r}
+# Basic inspection of each element
+glimpse(games)
+glimpse(players)
+glimpse(ranking)
+glimpse(teams)
+
+summary(games)
+str(games)
+```
+
+```{r}
+# Clean up column names
+library(janitor)
+
+games <- games %>% clean_names()
+players <- players %>% clean_names()
+teams <- teams %>% clean_names()
+ranking <- ranking %>% clean_names()
+```
+
+```{r}
+# Handle dates and types
+games$date <- as.Date(games$game_date_est)
+
+games <- games %>%
+  mutate(across(where(is.character), ~ trimws(.))) %>%
+  mutate(across(where(is.character), ~ ifelse(. == "", NA, .)))
+```
+
+```{r}
+sum(duplicated(games))
+colSums(is.na(games))
+
+games_clean <- games %>%
+  filter(!is.na(points))
+
+sum(duplicated(games))
+colSums(is.na(games))
+```
+
