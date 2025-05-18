@@ -49,9 +49,18 @@ sum(duplicated(games))
 colSums(is.na(games))
 
 games_clean <- games %>%
-  filter(!is.na(points))
+  filter(!is.na(pts_home) & !is.na(pts_away))
 
 sum(duplicated(games))
 colSums(is.na(games))
+```
+
+```{r}
+games_details <- read_csv("games_details.csv") 
+
+games_details <- games_details %>%
+  mutate(across(where(is.character), ~ na_if(., "-"))) %>%
+  mutate(across(where(is.character), ~ na_if(., "DNP"))) %>%
+  mutate(across(where(is.character), ~ na_if(., "")))
 ```
 
