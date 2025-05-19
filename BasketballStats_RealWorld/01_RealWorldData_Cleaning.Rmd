@@ -56,6 +56,8 @@ colSums(is.na(games))
 ```
 
 ```{r}
+# Trying game_details csv
+#CSV
 games_details <- read_csv("games_details.csv") 
 
 games_details <- games_details %>%
